@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -8,9 +7,9 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        HashMap<Integer, String[]> diccionario = new HashMap<Integer, String[]>();
         BinarySearchTree binarySearchTree = new BinarySearchTree();
         String[] frasecompleta = {};
+        int cantidadPalabras = 0;
 
         try {
             File obj = new File("Diccionario.txt");
@@ -20,18 +19,14 @@ public class Main {
                 contador++;
                 String data = myReader.nextLine();
                 String[] datasplit = data.split(","); 
-                diccionario.put(contador, datasplit);
+                Association<Integer, String[]> traduccion = new Association<Integer,String[]>(contador, datasplit);
+                binarySearchTree.insert(contador, traduccion);
             }
+            cantidadPalabras = contador;
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado.");
             e.printStackTrace();
-        }
-
-        for(int i = 1; i <= diccionario.size(); i++) {
-            String[] llave = diccionario.get(i);
-            Association<Integer, String[]> traduccion = new Association<Integer,String[]>(i, llave);
-            binarySearchTree.insert(i, traduccion);
         }
 
         try {
@@ -51,7 +46,7 @@ public class Main {
 		boolean var = false;
         a: while(var == false){
 
-            String idioma = "";
+            int idiomanumero = 0;
             String[] frase = frasecompleta;
      
             boolean var2 = false;
@@ -67,15 +62,15 @@ public class Main {
                     int opcion = scanner.nextInt();
 
                     if(opcion == 1){
-                        idioma = "Ingles";
+                        idiomanumero = 0;
                         var2 = true;
                     }
                     else if(opcion == 2){
-                        idioma = "Espanol";
+                        idiomanumero = 1;
                         var2 = true;
                     }
                     else if(opcion == 3){
-                        idioma = "Frances";
+                        idiomanumero = 2;
                         var2 = true;
                     }
                     else if(opcion == 4){
@@ -96,17 +91,18 @@ public class Main {
             
             for(int i = 0; i < frase.length; i++){
 
-                int llavearbol = 0;
                 String palabra = frase[i];
                 int contadorpalabras = 0;
     
-                for(int j = 1; j <= diccionario.size(); j++) {
-                    String[] llave = diccionario.get(j);
+                for(int j = 1; j <= cantidadPalabras; j++) {
+                    Node nodo = binarySearchTree.search(binarySearchTree.getRoot(), j);
+                    String[] llave = nodo.getTraduccion();
+
                     for(int k = 0; k < llave.length; k++){
     
                         String traduccion = llave[k];
                         if(traduccion.equalsIgnoreCase(palabra)){
-                            llavearbol = j;
+                            frase[i] = llave[idiomanumero];
                         }
                         else{
                             contadorpalabras++;
@@ -114,7 +110,7 @@ public class Main {
                     }
                 }
 
-                int limite = diccionario.size() * 3;
+                int limite = cantidadPalabras * 3;
                 if(contadorpalabras == limite){
                     String nuevaPalabra = "";
                     if(palabra.charAt(0) != '*' && palabra.charAt(palabra.length() - 1) != '*'){
@@ -128,23 +124,6 @@ public class Main {
                         }
                         frase[i] = nuevaPalabra;  
                     }
-                }
-                else{
-                    Node node = binarySearchTree.search(binarySearchTree.getRoot(), llavearbol);
-                    String[] traducciones = node.getTraduccion();
-
-                    int idiomanumero = -1;
-                    if(idioma.equals("Ingles")){
-                        idiomanumero = 0;
-                    }
-                    else if(idioma.equals("Espanol")){
-                        idiomanumero = 1;
-                    }
-                    else if(idioma.equals("Frances")){
-                        idiomanumero = 2;
-                    }
-
-                    frase[i] = traducciones[idiomanumero];
                 }
             }
 

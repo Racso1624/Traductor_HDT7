@@ -10,7 +10,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         HashMap<Integer, String[]> diccionario = new HashMap<Integer, String[]>();
         BinarySearchTree binarySearchTree = new BinarySearchTree();
-        String[] frase = {};
+        String[] frasecompleta = {};
 
         try {
             File obj = new File("Diccionario.txt");
@@ -39,7 +39,7 @@ public class Main {
             Scanner myReader = new Scanner(obj);
             String data = myReader.nextLine();
             data = data.replace(".", "");
-            frase = data.split(" ");
+            frasecompleta = data.split(" ");
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado.");
@@ -47,11 +47,12 @@ public class Main {
         }
 
         System.out.println("\nBienvenido al Traductor");
-		
+        	
 		boolean var = false;
         a: while(var == false){
 
             String idioma = "";
+            String[] frase = frasecompleta;
      
             boolean var2 = false;
             while(var2 == false){
@@ -98,7 +99,6 @@ public class Main {
                 int llavearbol = 0;
                 String palabra = frase[i];
                 int contadorpalabras = 0;
-                System.out.println("la palabra es" + palabra);
     
                 for(int j = 1; j <= diccionario.size(); j++) {
                     String[] llave = diccionario.get(j);
@@ -117,15 +117,17 @@ public class Main {
                 int limite = diccionario.size() * 3;
                 if(contadorpalabras == limite){
                     String nuevaPalabra = "";
-                    for(int j = -1; j < (palabra.length() + 1); j++){
-                        if(j == -1 || j == palabra.length()){
-                            nuevaPalabra += "*";
+                    if(palabra.charAt(0) != '*' && palabra.charAt(palabra.length() - 1) != '*'){
+                        for(int j = -1; j < (palabra.length() + 1); j++){
+                            if(j == -1 || j == palabra.length()){
+                                nuevaPalabra += "*";
+                            }
+                            else{
+                                nuevaPalabra += palabra.charAt(j);
+                            }
                         }
-                        else{
-                            nuevaPalabra += palabra.charAt(j);
-                        }
+                        frase[i] = nuevaPalabra;  
                     }
-                    frase[i] = nuevaPalabra;  
                 }
                 else{
                     Node node = binarySearchTree.search(binarySearchTree.getRoot(), llavearbol);

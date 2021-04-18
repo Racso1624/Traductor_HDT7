@@ -49,47 +49,51 @@ public class Main {
         System.out.println("\nBienvenido al Traductor");
 		
 		boolean var = false;
-        while(var == false){
+        a: while(var == false){
 
             String idioma = "";
      
-            System.out.println("\n\nIngrese la traduccion que desea:");
-            System.out.println("1) Ingles");
-            System.out.println("2) Español");
-            System.out.println("3) Francés");
-            System.out.println("4) Salir");
+            boolean var2 = false;
+            while(var2 == false){
+                System.out.println("\n\nIngrese la traduccion que desea:");
+                System.out.println("1) Ingles");
+                System.out.println("2) Español");
+                System.out.println("3) Francés");
+                System.out.println("4) Salir\n");
 
-            try {
-                
-                int opcion = scanner.nextInt();
+                try {
+                    
+                    int opcion = scanner.nextInt();
 
-                if(opcion == 1){
-                    idioma = "Ingles";
-                }
-                else if(opcion == 2){
-                    idioma = "Espanol";
-                }
-                else if(opcion == 3){
-                    idioma = "Frances";
-                }
-                else if(opcion == 4){
-                    var = true;
-                }
-                else{
-                    System.out.println("Opcion Incorrecta");
-                    var = true;
-                }
+                    if(opcion == 1){
+                        idioma = "Ingles";
+                        var2 = true;
+                    }
+                    else if(opcion == 2){
+                        idioma = "Espanol";
+                        var2 = true;
+                    }
+                    else if(opcion == 3){
+                        idioma = "Frances";
+                        var2 = true;
+                    }
+                    else if(opcion == 4){
+                        System.out.println("Saliendo del Programa");
+                        break a;
+                    }
+                    else{
+                        System.out.println("Opcion Incorrecta");
+                    }
 
-            } catch (InputMismatchException e) {
-                System.out.println("\nOpcion Incorrecta, Ingresela de Nuevo");
-                scanner.nextLine();
-                var = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("\nOpcion Incorrecta, Ingresela de Nuevo");
+                    scanner.nextLine();
+                }
             }
 
             binarySearchTree.inorder();
             
             for(int i = 0; i < frase.length; i++){
-                System.out.println("HOLA");
 
                 int llavearbol = 0;
                 String palabra = frase[i];

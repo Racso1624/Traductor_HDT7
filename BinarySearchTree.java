@@ -1,3 +1,10 @@
+/**
+ * Oscar Fernando López Barrios
+ * Carné 20679
+ * 
+ * BinarySearchTree
+ */
+
 // Java program to demonstrate
 // insert operation in binary
 // search tree
@@ -18,12 +25,28 @@ class BinarySearchTree {
 		root = null;
 	}
 
+	
+	/** 
+	 * Pre:Se tiene el BST
+	 * @param key es la llave que se ingresa
+	 * @param valores son los valores de association
+	 * Post:Se ingresan los valores al BST
+	 */
 	// This method mainly calls insertRec()
 	public void insert(int key, Association<Integer, String[]> valores)
 	{
 		root = insertRec(root, key, valores);
 	}
 
+	
+	/** 
+	 * Pre:Se tiene el BST
+	 * @param root es el root del BST
+	 * @param key es la llave que se ingresa
+	 * @param valores son los valores de association
+	 * @return Node es el nodo que se regresa
+	 * Pre:Se ingresa un nuevo valor
+	 */
 	/* A recursive function to
 	insert a new key in BST */
 	public Node insertRec(Node root, int key, Association<Integer, String[]> valores)
@@ -47,12 +70,22 @@ class BinarySearchTree {
 		return root;
 	}
 
+	/** 
+	 * Pre:Se tiene el BST
+	 * Post:Se ordena el BST
+	 */
 	// This method mainly calls InorderRec()
 	public void inorder()
 	{
 		inorderRec(root);
 	}
 
+	
+	/** 
+	 * Pre:Se tiene el BST
+	 * @param root es root del BST
+	 * Post:Se ordena el BST
+	 */
 	// A utility function to
 	// do inorder traversal of BST
 	public void inorderRec(Node root)
@@ -63,7 +96,15 @@ class BinarySearchTree {
 		}
 	}
 
-    // A utility function to search a given key in BST
+    
+	/** 
+	 * Pre:Se tiene el BST
+	 * @param root es el root del BST
+	 * @param key es la llave que se busca
+	 * @return Node es el nodo
+	 * Post:Se regresa el nodo deseado del BST
+	 */
+	// A utility function to search a given key in BST
 	public Node search(Node root, int key)
 	{
 		// Base Cases: root is null or key is present at root
@@ -78,7 +119,13 @@ class BinarySearchTree {
 		return search(root.left, key);
 	}
 
-    public Node getRoot() {
+    
+	/** 
+	 * Pre:Se tiene el root
+	 * @return Node se regresa el root del Nodo
+	 * Post:Se regresa el root del Nodo
+	 */
+	public Node getRoot() {
         return root;
     }
 }

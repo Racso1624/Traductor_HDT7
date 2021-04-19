@@ -1,3 +1,10 @@
+/**
+ * Oscar Fernando López Barrios
+ * Carné 20679
+ * 
+ * BinaryTree
+ */
+
 // An implementation of nodes for use in binary trees.
 // (c) 1998, 2001 duane a. bailey
 /**

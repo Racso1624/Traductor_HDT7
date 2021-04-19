@@ -1,3 +1,10 @@
+/**
+ * Oscar Fernando López Barrios
+ * Carné 20679
+ * 
+ * MapEntry
+ */
+
 public interface MapEntry<K,V>
 {
    public boolean equals (Object o);

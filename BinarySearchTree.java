@@ -88,13 +88,14 @@ class BinarySearchTree {
 	 */
 	// A utility function to
 	// do inorder traversal of BST
-	public void inorderRec(Node root)
-	{
-		if (root != null) {
-			inorderRec(root.left);
-			inorderRec(root.right);
-		}
-	}
+	void inorderRec(Node root)
+    {
+        if (root != null) {
+            inorderRec(root.left);
+            System.out.println(root.key);
+            inorderRec(root.right);
+        }
+    }
 
     
 	/** 

@@ -28,11 +28,20 @@ public class Node {
 	/** 
 	 * Pre:Se tiene el array
 	 * @return String[] es array de String
-	 * Post:Se regresa el String
+	 * Post:Se regresa el array
 	 */
 	//Se regresa el array dentro del nodo
 	public String[] getTraduccion() {
 		return traducciones.getValue();
+	}
+
+	/** 
+	 * Pre:Se tiene el association
+	 * @return String[] es array de String
+	 * Post:Se regresa el association
+	 */
+	public Association<Integer, String[]> getTraducciones() {
+		return traducciones;
 	}
 
 }

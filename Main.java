@@ -109,7 +109,9 @@ public class Main {
                 }
             }
 
+            System.out.println("\nLos valores de las llaves del arbol son:");
             binarySearchTree.inorder();//Se realiza el InOrder del BST
+            System.out.println("\n");
             
             for(int i = 0; i < frase.length; i++){//Se realiza el ciclo del tamaño de la frase
 
